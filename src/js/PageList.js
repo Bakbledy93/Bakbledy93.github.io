@@ -1,6 +1,9 @@
 import{Button} from"./index";
+import moment from "moment";
+
 
 const PageList = (argument = "") => {
+
   const preparePage = () => {
     let cleanedArgument = argument.replace(/\s+/g, "-");
     let articles = "";
@@ -27,7 +30,7 @@ const PageList = (argument = "") => {
         });
     };
 
-    fetchList("https://api.rawg.io/api/games?dates=2021-01-01,2021-12-31&ordering=-added", cleanedArgument);
+    fetchList(`https://api.rawg.io/api/games?dates=${dateToday},${date365}&ordering=-added`, cleanedArgument);
   };
 
   const render = () => {
@@ -44,6 +47,9 @@ const PageList = (argument = "") => {
 
     preparePage();
   };
+
+  const dateToday = moment(Date.now()).format("YYYY-MM-DD");
+  const date365 = moment(Date.now() + 3.154e+10).format("YYYY-MM-DD");
 
   render();
 };
