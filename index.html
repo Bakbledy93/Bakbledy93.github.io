@@ -10,8 +10,28 @@
     <body>
       <a href="#">Home</a>
       <a href="#pagelist">PageList</a>
-      <a href="#pagelist/borderlands">PageList borderlands</a>
-  
+
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" id="searchbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group mb-3 mt-3 mr-sm-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Plateform</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01">
+            <option value="0">Any</option>
+            <option value="4">PC</option>
+            <option value="18">Playstation 4</option>
+            <option value="1">Xbox One</option>
+            <option value="7">Switch</option>
+            <option value="3">Iphone</option>
+            <option value="6">Linux</option>
+          </select>
+        </div>
+    
+        <button class="btn btn-outline-success my-2 my-sm-0"  id="searchbtn" type="submit">Search</button>
+      </form>
+
+
       <section id="pageContent">Choissez un lien</section>
       <script src="dist/bundle.js"></script>
     </body>
