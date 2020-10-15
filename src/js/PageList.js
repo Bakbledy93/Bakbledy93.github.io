@@ -1,5 +1,13 @@
 import moment from "moment";
 
+let platform; 
+const select = document.getElementById("inputGroupSelect01");
+const searchBar = document.getElementById("searchbar");
+const searchButton = document.querySelector("#searchbtn");
+const dateToday = moment(Date.now()).format("YYYY-MM-DD");
+const date365 = moment(Date.now() + 3.154e+10).format("YYYY-MM-DD");
+console.log(dateToday);
+console.log(date365);
 
 const PageList = (argument = "") => {
 
@@ -8,7 +16,7 @@ const PageList = (argument = "") => {
     let articles = "";
 
     const fetchList = (url, argument, platformValue = 0, quest = "no") => {
-      console.log("A")
+      // console.log("A")
       let finalURL = url;
       let platformSelect;
 
@@ -42,9 +50,9 @@ const PageList = (argument = "") => {
         .then((response) => {
           articles = "";
 
-          if (platformSelect == undefined){
-            platformSelect = 0;
-          }
+          // if (platformSelect == undefined){
+          //   platformSelect = 0;
+          // }
 
           console.log(platformSelect);
           console.log(response.results);
@@ -88,11 +96,10 @@ const PageList = (argument = "") => {
           function nextMethod(e) {
             e.preventDefault();
                 platform =selectValue();
-                // argument = gameTitleValue();
-                console.log(argument)
-                console.log("ni hao");
+                // console.log(argument)
+                // console.log("ni hao");
                 if (argument == ""){
-                  console.log("to do bon");
+                  // console.log("to do bon");
                   fetchList(`https://api.rawg.io/api/games?page=2&dates=${dateToday},${date365}&ordering=-added`, argument, platform);
                 }
                 else{
@@ -104,11 +111,10 @@ const PageList = (argument = "") => {
           function previousMethod(e) {
             e.preventDefault();
             platform =selectValue();
-            // argument = gameTitleValue();
-            console.log(argument)
-            console.log("ni hao");
+            // console.log(argument)
+            // console.log("ni hao");
             if (argument == ""){
-              console.log("to do bon");
+              // console.log("to do bon");
               fetchList(`https://api.rawg.io/api/games?page=1&dates=${dateToday},${date365}&ordering=-added`, argument, platform);
             }
             else{
@@ -120,12 +126,11 @@ const PageList = (argument = "") => {
           function nextnextMethod(e) {
             e.preventDefault();
             platform =selectValue();
-            console.log(argument)
-            // argument = gameTitleValue();
-            console.log("ni hao");
+            // console.log(argument)
+            // console.log("ni hao");
                 articles = "";
                 if (argument == ""){
-                  console.log("to do bon");
+                  // console.log("to do bon");
                   fetchList(`https://api.rawg.io/api/games?page=1&dates=${dateToday},${date365}&ordering=-added`, argument, platform, "yes");
                 }
                 else{
@@ -164,25 +169,6 @@ const PageList = (argument = "") => {
         });
     };
 
-
-    function removeDefaultLink(e){
-      e.preventDefault();
-      let argument = gameTitleValue();
-      let cleanedArgument = argument.replace(/\s+/g, "-");
-      let newURL = `#pagelist/${cleanedArgument}`;
-      document.location.href = newURL;
-      document.querySelector(".row").innerHTML = '';
-      console.log(argument.replace(/\s+/g, "-"));
-      platform =selectValue();
-      console.log(platform);
-      fetchList(`https://api.rawg.io/api/games`,argument, platform);
-    };
-
-    function selectValue(){
-      const Value = select.value;
-      return Value
-    };
-    
     if (argument){   
       console.log("ola");
       fetchList(`https://api.rawg.io/api/games`, cleanedArgument, platform);
@@ -191,6 +177,7 @@ const PageList = (argument = "") => {
       console.log("salute");
       fetchList(`https://api.rawg.io/api/games?dates=${dateToday},${date365}&ordering=-added`, cleanedArgument, platform);
     };
+    
     searchButton.addEventListener('click', removeDefaultLink);
     select.addEventListener('change',selectValue)
 
@@ -217,18 +204,24 @@ const PageList = (argument = "") => {
     preparePage();
   };
 
-  let platform; 
-  const select = document.getElementById("inputGroupSelect01");
-  const searchBar = document.getElementById("searchbar");
-  const searchButton = document.querySelector("#searchbtn");
-  const dateToday = moment(Date.now()).format("YYYY-MM-DD");
-  const date365 = moment(Date.now() + 3.154e+10).format("YYYY-MM-DD");
-  console.log(dateToday);
-  console.log(date365);
-
   const gameTitleValue = () =>{
-    let gameTitleValue = searchBar.value;
-    return gameTitleValue;
+    return searchBar.value;
+  };
+
+  const selectValue = () =>{
+    return select.value; 
+  };
+
+  function removeDefaultLink(e){
+    e.preventDefault();
+    document.querySelector(".row").innerHTML = '';
+    let argument = gameTitleValue();
+    let cleanedArgument = argument.replace(/\s+/g, "-");
+    let newURL = `#pagelist/${cleanedArgument}`;
+    // console.log(argument.replace(/\s+/g, "-"));
+    platform =selectValue();
+    document.location.href = newURL;
+    // fetchList(`https://api.rawg.io/api/games`,argument, platform);
   };
 
   render();
