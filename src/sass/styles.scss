@@ -1,7 +1,152 @@
-$red: rgb(255, 20, 20);
+@import "~bootstrap/scss/bootstrap";
+@import "./resets";
+@import "./variables";
 
-// p {
-//   color: $red;
+@function weight($weight-name) {
+  @return map-get($font-weights, $weight-name);
+};
+
+@mixin flexCenter($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin theme($light-theme: true) {
+  @if $light-theme {
+    background: lighten($primary-color, 100%);
+    color: darken($text-color, 100%);
+  }
+}
+
+
+@mixin mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}
+
+body {
+  background: $primary-color;
+  color: $text-color;
+}
+
+.main {
+  width: 80%;
+  margin: 0 auto;
+  @include flexCenter(row);
+
+  #{&}__paragraph1 {
+    font-weight: weight(bold);
+    &:hover {
+      color: palevioletred;
+    }
+  }
+
+  @include mobile{
+    flex-direction: column;
+  }
+
+  #{&}__paragraph2 {
+    @extend .main__paragraph1;
+
+    &:hover {
+      color: $accent-color;
+    };
+    
+  }
+}
+
+.light {
+  @include theme($light-theme: true)
+}
+
+.the-cards {
+  position: relative;
+}
+
+.cards-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  right: 0;
+  background-color: black;
+  overflow: hidden;
+  width: 0;
+  height: 100%;
+  transition: .2s ease;
+  text-overflow: hidden;
+  opacity: 95%;
+}
+
+.the-cards:hover .cards-overlay {
+  width: 100%;
+  left: 0;
+}
+
+#detailsBtn {
+  position: absolute;
+}
+
+.rounded-pill {
+  border-radius: 1rem
+}
+
+.main-image {
+  border-radius: 1em;
+}
+
+.card-deck {
+  padding: inherit;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.ilink, .ilink:visited {
+	text-decoration: none;
+	position: relative;
+	color: #069;
+	
+	&:after {
+		content: '';
+		height: 1px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		background: white;
+		transition: 0.2s;
+	}
+
+	&:hover:after {
+		width: 100%;
+	}
+	
+}
+
+// #pageContent {
+//   opacity: 0; 
+//   transition: opacity 3s;
 // }
 
-@import "~bootstrap/scss/bootstrap";
+body {
+  background: rgb(0,0,0);
+  background: $main-gradient;
+}
+
+// .checkbox-container {
+//   position: relative;
+// }
+
+// .custom-checkbox {
+//   position: absolute;
+//   bottom: 82%;
+//   left: 92%;
+//   transform: scale(1.5);
+//   border-radius: 1em;
+  
+// }

@@ -1,5 +1,3 @@
-console.log("hello");
-
 import "../sass/styles.scss";
 import 'bootstrap';
 import{routes} from"./routes";

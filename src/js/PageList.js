@@ -10,8 +10,8 @@ const PageList = (argument = "") => {
   const date365 = moment(Date.now() + 3.154e+10).format("YYYY-MM-DD");
   let showMoreCount = 1
   let totalResults = 0;
-  console.log(dateToday);
-  console.log(date365);
+  // console.log(dateToday);
+  // console.log(date365);
   let articles = "";
 
   const preparePage = () => {
@@ -46,7 +46,7 @@ const PageList = (argument = "") => {
         console.log("C")
         finalURL = `${url}?&page_size=9&page=${showMoreCount}`;
       }
-      // console.log(platformSelect);
+      console.log(platformSelect);
 
       fetch(`${finalURL}`)
         .then((response) => response.json())
@@ -63,40 +63,40 @@ const PageList = (argument = "") => {
               index = platformID.map(function(x){
                 return x.platform.id;
                 }); 
-              console.log(typeof(platformSelect));
-              console.log(typeof(index[0]));
-              console.log(index);
-              console.log(platformSelect);
-              console.log(index.includes(platformSelect));
+              // console.log(typeof(platformSelect));
+              // console.log(typeof(index[0]));
+              // console.log(index);
+              // console.log(platformSelect);
+              // console.log(index.includes(platformSelect));
 
             if (platformSelect == 0 ||index.includes(platformSelect)==true){
               console.log("hello")
-              articles += `
-
-              <div class="col-4 mt-4">
-              <div class="card mr-3 mb-3" style="width: 18rem;">
-                <img class="card-img-top" src="${article.background_image}" alt="Card image cap">
-                <div class="card-body bg-dark">
-                <h4 class="text-white">${article.name}</h4>
-                <h5 class="text-white">${article.released}</h5>
-                <a href = "#pagedetail/${article.id}">${article.id}</a>
-                </div>
-              </div>
-            </div>
-
-            `;
+              fetch(`https://api.rawg.io/api/games/${article.id}`)
+              .then((response2) => response2.json())
+              .then((response2) => {
+                console.log("alo")
+                articles += `${gameCard(
+                                article.id,
+                                article.background_image,
+                                article.name,
+                                article.released,
+                                response2.developers[0].name,
+                                article.genres.map(genre => genre.name).join(" • "),
+                                response2.rating,
+                                response2.ratings_count,
+                                article.platforms.map(platform => platform.platform.name).join(" • ")
+                )}`;
+                if (argument) {
+                  message.innerHTML = `Search: ${gameTitleValue()}`
+                }
+                document.querySelector(".page-list .row").innerHTML = articles;
+                if (searchModulo > 0 && showMoreCount < 3) {
+                  document.querySelector(".page-list .row").innerHTML += lightButton("showMoreBtn", "Show more");
+                  showMoreBtn.addEventListener('click', showMore);
+                }
+              });
             }
           });
-          if (argument) {
-            message.innerHTML = `Search: ${gameTitleValue()}`
-          }
-          document.querySelector(".page-list .row").innerHTML = articles;
-          
-          if (searchModulo > 0 && showMoreCount < 3) {
-            document.querySelector(".page-list .row").innerHTML += lightButton("showMoreBtn", "Show more");
-            showMoreBtn.addEventListener('click', showMore);
-          }
-
         });
     };
 
@@ -155,7 +155,10 @@ const PageList = (argument = "") => {
     </div>
       <section class="page-list mx-auto">
       <h1 class="display-3 font-weight-bold message mb-5"></h1>
+        <div class="container">
         <div class="row">...loading</div>
+        <div class="button"></div>
+        </div>
       </section>
     `;
 

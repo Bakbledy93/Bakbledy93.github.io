@@ -1,5 +1,5 @@
 const lightButton = (id, text) => {
-  return `<button "type="button" class="btn btn-light mt-5 mb-5" id="${id}">${text}</button>`;
+  return `<row><button "type="button" class="btn btn-light mt-5 mb-5" id="${id}">${text}</button></row>`;
 };
 
 const gameCard = (id, image, name, released, developers, genres, rate, votes, platforms) => {

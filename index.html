@@ -8,29 +8,43 @@
     </head>
 
     <body>
-      <a href="#">Home</a>
-      <a href="#pagelist">PageList</a>
+      <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">THP PGM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#pagelist">PageList</a>
+            </li>
+          </ul>
 
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" id="searchbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group mb-3 mt-3 mr-sm-2">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Plateform</label>
-          </div>
-          <select class="custom-select" id="inputGroupSelect01">
-            <option value="0">Any</option>
-            <option value="4">PC</option>
-            <option value="18">Playstation 4</option>
-            <option value="1">Xbox One</option>
-            <option value="7">Switch</option>
-            <option value="3">Iphone</option>
-            <option value="6">Linux</option>
-          </select>
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" id="searchbar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group mb-3 mt-3 mr-sm-2">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Plateform</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option value="0">Any</option>
+                <option value="4">PC</option>
+                <option value="18">Playstation 4</option>
+                <option value="1">Xbox One</option>
+                <option value="7">Switch</option>
+                <option value="3">Iphone</option>
+                <option value="6">Linux</option>
+              </select>
+            </div>
+        
+            <button class="btn btn-outline-success my-2 my-sm-0"  id="searchbtn" type="submit">Search</button>
+          </form>
         </div>
-    
-        <button class="btn btn-outline-success my-2 my-sm-0"  id="searchbtn" type="submit">Search</button>
-      </form>
-
+      </nav>
 
       <section id="pageContent">Choissez un lien</section>
       <script src="dist/bundle.js"></script>
